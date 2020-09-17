@@ -4,7 +4,6 @@ LOGIN_FORM_URL = "http://localhost:8080/login"
 PAY_FORM_URL = "http://localhost:8080/pay"
 
 def submit_login_form(sess, username, password):
-    # You may need to include CSRF token from Exercise 1.5 in request below 
     response = sess.post(LOGIN_FORM_URL,
                          data={
                              "username": username,
@@ -14,6 +13,7 @@ def submit_login_form(sess, username, password):
     return response.status_code == codes.ok
 
 def submit_pay_form(sess, recipient, amount):
+    # You may need to include CSRF token from Exercise 1.5 in request below 
     response = sess.post(PAY_FORM_URL,
                     data={
                         "recipient": recipient,
