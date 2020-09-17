@@ -13,7 +13,7 @@ def submit_login_form(sess, username, password):
     return response.status_code == codes.ok
 
 def submit_pay_form(sess, recipient, amount):
-    # You may need to include CSRF token from Exercise 1.5 in request below 
+    # You may need to include CSRF token from Exercise 1.5 in the POST request below 
     response = sess.post(PAY_FORM_URL,
                     data={
                         "recipient": recipient,
