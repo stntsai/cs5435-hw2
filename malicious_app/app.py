@@ -22,5 +22,5 @@ def receive_xss_output():
 
 
 def run_server():
-    run(host='localhost', port=8081)
+    run(host='0.0.0.0', port=8081)
 
