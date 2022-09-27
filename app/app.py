@@ -31,4 +31,4 @@ def run_server():
         engine,
         keyword='db',
     ))
-    run(host='0.0.0.0', port=8082)
+    run(host='0.0.0.0', port=8080)
