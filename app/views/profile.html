@@ -1,15 +1,12 @@
-{% extends "base.html" %}
-
-{% block title %}Profile{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Profile{% endblock %} {% block
+content %}
 <div class="profile-container">
   <h1 class="profile-header">{{ user.username|e }}</h1>
   <div>
     <strong>Coins:</strong> {{ user.coins|e }}
-    <br>
+    <br />
     <!-- Task 2.7 sanitation check for stored XSS attack-->
-    <strong>About Me:</strong><br>{{ user.aboutme|e }}
+    <strong>About Me:</strong><br />{{ user.aboutme|e }}
   </div>
 </div>
 
@@ -26,7 +23,10 @@
       <div class="form-label">Amount:</div>
       <div class="form-input"><input name="amount" type="number" /></div>
     </div>
-    <input class="form-button" type="submit" value="Pay"/>
+    <div class="form-group">
+      <input name="auth-token" type="hidden" value="{{ session_id }}" />
+    </div>
+    <input class="form-button" type="submit" value="Pay" />
   </form>
 
   {% if payment_error %}
@@ -40,7 +40,7 @@
     <div class="form-group">
       <div class="form-input"><input name="aboutme" type="text" /></div>
     </div>
-    <input class="form-button" type="submit" value="Update"/>
+    <input class="form-button" type="submit" value="Update" />
   </form>
 </div>
 
@@ -59,5 +59,4 @@
 
 </script> -->
 
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}
