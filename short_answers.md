@@ -1,5 +1,7 @@
 # HW2 Short Answers
 
+Jiahao Dong(jd787) Minghan Tsai(mt627)
+
 ## Task 1.6
 
 1.
